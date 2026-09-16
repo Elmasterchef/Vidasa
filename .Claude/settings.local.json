@@ -1,0 +1,17 @@
+{
+  "env": {
+    "ANTHROPIC_BASE_URL": "http://localhost:20128",
+    "ANTHROPIC_AUTH_TOKEN": "Seu token",
+    "ANTHROPIC_MODEL": "combo/modelos-gratuitos"
+  },
+  "permissions": {
+    "allow": [
+      "Bash(python3 -c \"import html.parser; p=html.parser.HTMLParser\\(\\); p.feed\\(open\\('C:/Users/Rafael Franzen/OneDrive/Documentos/DevBackend/public/index.html'\\).read\\(\\)\\); print\\('HTML OK'\\)\")",
+      "Bash(node -c app.js)",
+      "Bash(node -c public/app.js)",
+      "Bash(echo \"Exit: $?\")",
+      "Bash(git add *)",
+      "Bash(git commit *)"
+    ]
+  }
+}

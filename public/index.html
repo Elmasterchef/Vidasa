@@ -3,306 +3,105 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<meta name="description" content="VidaSã — Conecte sua rotina saudável. Feed, mensagens, grupos e progresso.">
-<title>VidaSã — Rede social saudável</title>
+<title>Santo Sabor — Marmitas Caseiras</title>
+<meta name="description" content="Marmitas caseiras de frango, bife e peixe. Entrega rápida em Biguaçu, SC. Pedido direto pelo site.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,400&family=JetBrains+Mono:wght@400&display=swap">
-<link rel="stylesheet" href="style.css">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--tema:#D97706;--tema-escuro:#92400E;--fundos:#FFF8F0;--fundo-card:#fff;--texto:#3E2723;--cinza:#6D4C41;--borda:#EAE0D6;--sombra:rgba(62,39,35,.08);}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Poppins',system-ui,sans-serif;background:var(--fundos);color:var(--texto);line-height:1.45}
+img{max-width:100%;height:auto;display:block;border-radius:.6rem}
+a{color:var(--tema);text-decoration:none}
+.container{max-width:720px;margin:0 auto;padding:1rem}
+header{background:linear-gradient(135deg,#D97706,#92400E);color:#fff;padding:1.8rem 1rem;text-align:center;position:relative;overflow:hidden}
+header::after{content:"";position:absolute;inset:0;background:url('data:image/svg+xml,%3Csvg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 1440 320\"%3E%3Cpath fill=\"%23ffffff\" fill-opacity=\".08\" d=\"M0,160L48,176C96,192,192,224,288,224C384,224,480,192,576,165C672,139,768,117,864,128C960,139,1056,181,1152,181C1248,181,1344,139,1392,117L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z\"/%3E%3C/svg%3E') bottom/cover no-repeat;opacity:.9;pointer-events:none}
+header h1{font-size:2rem;font-weight:900;letter-spacing:-.02em;position:relative;z-index:1}
+header p{font-weight:300;opacity:.95;position:relative;z-index:1;margin-top:.25rem}
+.hero-img{width:100%;height:220px;object-fit:cover;border-radius:1rem;margin:1rem 0;box-shadow:0 10px 30px var(--sombra)}
+.section{margin:1.5rem 0}
+.section h2{font-size:1.15rem;font-weight:700;margin-bottom:.75rem;color:var(--tema-escuro);border-left:4px solid var(--tema);padding-left:.6rem}
+.card-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:.75rem}
+.card{background:var(--fundo-card);border:1px solid var(--borda);border-radius:.85rem;padding:.6rem;box-shadow:0 4px 12px var(--sombra);transition:transform .15s ease, box-shadow .15s ease}
+.card:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(62,39,35,.12)}
+.card img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:.5rem;margin-bottom:.5rem}
+.card h3{font-size:.85rem;font-weight:600;color:var(--texto);margin-bottom:.25rem;line-height:1.2}
+.card .price{font-weight:700;color:var(--tema);font-size:.95rem}
+.card .meta{font-size:.75rem;color:var(--cinza)}
+.btn{display:inline-block;background:var(--tema);color:#fff;padding:.65rem .9rem;border-radius:.6rem;font-weight:700;font-size:.9rem;border:none;cursor:pointer;width:100%;text-align:center;transition:background .2s}
+.btn:hover{background:var(--tema-escuro)}
+.btn-outline{background:transparent;color:var(--tema);border:1px solid var(--tema);width:auto;padding:.55rem .8rem;font-size:.85rem}
+.nav-bar{display:flex;gap:.5rem;overflow-x:auto;padding:.75rem 0;margin:1rem 0;-ms-overflow-style:none;scrollbar-width:none}
+.nav-bar::-webkit-scrollbar{display:none}
+.nav-bar a{flex:0 0 auto;background:#fff;border:1px solid var(--borda);padding:.5rem .85rem;border-radius:999px;font-size:.85rem;font-weight:600;color:var(--texto);white-space:nowrap;box-shadow:0 2px 6px rgba(0,0,0,.04)}
+.nav-bar a.active{background:var(--tema);color:#fff;border-color:var(--tema)}
+.badge{display:inline-block;background:#2A9D8F;color:#fff;font-size:.7rem;padding:.15rem .45rem;border-radius:999px;font-weight:700;margin-top:.25rem}
+footer{margin-top:2rem;padding:1.5rem 1rem;text-align:center;color:var(--cinza);font-size:.85rem;border-top:1px solid var(--borda)}
+@media(min-width:640px){.card-grid{grid-template-columns:repeat(3,1fr)}header h1{font-size:2.6rem}}
+</style>
 </head>
 <body>
-
-<header class="site-header" role="banner" aria-label="Cabeçalho do VidaSã">
-  <div class="inner">
-    <a href="#" class="logo" aria-label="VidaSã — página inicial">Vida<span style="color:var(--accent-2);">Sã</span></a>
-    <span class="badge" id="badge" aria-label="Aba ativa">feed</span>
-    <nav class="nav-pill" aria-label="Navegação principal">
-      <a href="#" class="active" data-tab="feed" aria-label="Feed de rotinas">Feed</a>
-      <a href="#" data-tab="mensagens" aria-label="Mensagens">Msgs</a>
-      <a href="#" data-tab="grupos" aria-label="Grupos">Grupos</a>
-      <a href="#" data-tab="progresso" aria-label="Progresso">Progresso</a>
-    </nav>
-    <a href="#" onclick="App.openAuthModal(); return false;" class="auth-btn" aria-label="Cadastro e Login">Entrar</a>
-  </div>
+<header>
+  <h1>Santo Sabor</h1>
+  <p>Marmitas caseiras • Entrega rápida • Biguaçu / SC</p>
 </header>
 
-<main role="main" aria-label="Conteúdo principal">
+<main class="container" aria-label="Loja Santo Sabor">
+  <img src="public/bife-milanesa-m.png" alt="Marmita Bife a Milanesa" class="hero-img" loading="lazy" onerror="this.style.display='none'">
 
-  <!-- Aba: Feed -->
-  <section class="tab-content active" id="tab-feed" aria-label="Feed de rotinas saudáveis" role="feed">
-    <div aria-label="Histórias de rotinas" style="margin-bottom: 28px;">
-      <div class="stories" role="list" aria-label="Histórias de rotinas">
-        <a href="#" class="story-ring" role="listitem" aria-label="João Costa — rotina de corrida">
-          <div class="avatar" style="position:relative;">
-            <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=160&h=160&fit=crop&crop=face&q=80" alt="João Costa" loading="eager">
-          </div>
-          <span class="name">João Costa</span>
-        </a>
-        <a href="#" class="story-ring" role="listitem" aria-label="Marina Silva — yoga">
-          <div class="avatar"><img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=160&h=160&fit=crop&crop=face&q=80" alt="Marina Silva"></div>
-          <span class="name">Marina Silva</span>
-        </a>
-        <a href="#" class="story-ring" role="listitem" aria-label="Pedro Lima — musculação">
-          <div class="avatar" style="position:relative;"><img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=160&h=160&fit=crop&crop=face&q=80" alt="Pedro Lima"><span class="live-dot" aria-label="ao vivo"></span></div>
-          <span class="name">Pedro Lima</span>
-        </a>
-        <a href="#" class="story-ring" role="listitem" aria-label="Ana Beatriz — alimentação">
-          <div class="avatar"><img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=160&h=160&fit=crop&crop=face&q=80" alt="Ana Beatriz"></div>
-          <span class="name">Ana Beatriz</span>
-        </a>
-        <a href="#" class="story-ring" role="listitem" aria-label="Lucas Fernandes — corrida matinal">
-          <div class="avatar"><img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=160&h=160&fit=crop&crop=face&q=80" alt="Lucas Fernandes"></div>
-          <span class="name">Lucas Fern.</span>
-        </a>
-      </div>
-    </div>
+  <nav class="nav-bar" aria-label="Menu do site">
+    <a href="index.html" class="active">Home</a>
+    <a href="menu.html">Cardápio</a>
+    <a href="produto.html">Produto</a>
+    <a href="carrinho.html">Carrinho</a>
+    <a href="checkout.html">Checkout</a>
+    <a href="acompanhamento.html">Acompanhar</a>
+    <a href="login.html">Entrar</a>
+  </nav>
 
-    <div class="feed" id="feed-container" aria-label="Postagens de rotinas saudáveis">
-      <!-- Post 1 -->
-      <article class="post-card" aria-label="Postagem de João Costa — rotina de corrida">
-        <div class="card-head">
-          <a href="#" aria-label="Perfil de João Costa"><img class="author" src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=160&h=160&fit=crop&crop=face&q=80" alt="João Costa"></a>
-          <div class="meta">
-            <h3><a href="#">João Costa</a></h3>
-            <div class="time">Hoje, 07:42 <span aria-label="categoria">· <span class="tag">Corrida</span></span></div>
-          </div>
-        </div>
-        <a href="#" class="post-img" aria-label="Ver postagem completa de João Costa sobre corrida matinal">
-          <img src="https://images.unsplash.com/photo-1476480862126-209bfaa8edc8?w=1200&h=750&fit=crop&q=80" alt="Homem correndo ao amanhecer com vista de montanhas" loading="lazy">
-          <div class="overlay"></div>
-          <div class="overlay-text"><h2>Minha rotina de corrida das 6h</h2><p>15 km · 5:30/km · 4 dias por semana</p></div>
-        </a>
-        <div class="post-body">
-          <p>Comecei há 8 meses. No começo era só 3 km, mas com consistência cheguei aos 15. A chave é não pular dias — mesmo quando chove.</p>
-          <div class="comment-preview" aria-label="Comentários">
-            <div class="c"><strong>Marina Silva</strong> Que inspiração! Vou tentar começar amanhã.</div>
-            <div class="c"><strong>Pedro Lima</strong> 4 dias já é uma base sólida.</div>
-          </div>
-          <div class="actions" role="group" aria-label="Ações na postagem">
-            <button onclick="this.classList.toggle('liked')" aria-label="Curtir postagem" aria-pressed="false"><span aria-hidden="true">❤️</span> 128</button>
-            <button onclick="App.openChat('marina')" aria-label="Conversar com Marina Silva"><span aria-hidden="true">💬</span> 14</button>
-            <button aria-label="Compartilhar"><span aria-hidden="true">↗</span> 8</button>
-          </div>
-        </div>
+  <section class="section" aria-label="Destaques">
+    <h2>Cardápio de hoje</h2>
+    <div class="card-grid">
+      <article class="card" onclick="location.href='produto.html?nome=Bife+a+Milanesa'">
+        <img src="public/bife-milanesa-m.png" alt="Bife a Milanesa" loading="lazy">
+        <h3>Bife a Milanesa</h3>
+        <div class="price">R$ 28,00</div>
+        <div class="meta">M / G • Frango/Peixe</div>
       </article>
-
-      <!-- Post 2 -->
-      <article class="post-card" aria-label="Postagem de Ana Beatriz — alimentação balanceada">
-        <div class="card-head">
-          <a href="#" aria-label="Perfil de Ana Beatriz"><img class="author" src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=160&h=160&fit=crop&crop=face&q=80" alt="Ana Beatriz"></a>
-          <div class="meta">
-            <h3><a href="#">Ana Beatriz</a></h3>
-            <div class="time">Ontem, 19:15 <span aria-label="categoria">· <span class="tag">Alimentação</span></span></div>
-          </div>
-        </div>
-        <a href="#" class="post-img" aria-label="Ver postagem completa de Ana Beatriz sobre alimentação balanceada">
-          <img src="https://images.unsplash.com/photo-1498837167922-ddd27525d352?w=1200&h=750&fit=crop&q=80" alt="Tigela de salada saudável com abacate, quinoa e legumes frescos" loading="lazy">
-          <div class="overlay"></div>
-          <div class="overlay-text"><h2>Meu prato do dia</h2><p>Quinoa + abacate + grão-de-bico + dressing de limão</p></div>
-        </a>
-        <div class="post-body">
-          <p>Não é sobre dieta — é sobre consistência. Esse prato leva 10 minutos e me mantém satisfeita até o jantar. Adicionei grão-de-bico para proteína.</p>
-          <div class="comment-preview" aria-label="Comentários">
-            <div class="c"><strong>Lucas Fernandes</strong> Vou copiar essa receita no fim de semana!</div>
-          </div>
-          <div class="actions" role="group" aria-label="Ações na postagem">
-            <button onclick="this.classList.toggle('liked')" aria-label="Curtir postagem" aria-pressed="false"><span aria-hidden="true">❤️</span> 215</button>
-            <button onclick="App.openChat('ana')" aria-label="Conversar com Ana Beatriz"><span aria-hidden="true">💬</span> 31</button>
-            <button aria-label="Compartilhar"><span aria-hidden="true">↗</span> 42</button>
-          </div>
-        </div>
+      <article class="card" onclick="location.href='produto.html?nome=Filé+de+Frango+Grelhado'">
+        <img src="public/frango-cavalo-m.png" alt="Filé de Frango Grelhado" loading="lazy">
+        <h3>Filé de Frango Grelhado</h3>
+        <div class="price">R$ 25,00</div>
+        <div class="meta">M / G</div>
       </article>
-
-      <!-- Post 3 -->
-      <article class="post-card" aria-label="Postagem de Marina Silva — yoga matinal">
-        <div class="card-head">
-          <a href="#" aria-label="Perfil de Marina Silva"><img class="author" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=160&h=160&fit=crop&crop=face&q=80" alt="Marina Silva"></a>
-          <div class="meta">
-            <h3><a href="#">Marina Silva</a></h3>
-            <div class="time">2 dias atrás <span aria-label="categoria">· <span class="tag">Yoga</span></span></div>
-          </div>
-        </div>
-        <a href="#" class="post-img" aria-label="Ver postagem completa de Marina Silva sobre yoga matinal">
-          <img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=1200&h=750&fit=crop&q=80" alt="Mulher praticando yoga ao amanhecer em ambiente de natureza" loading="lazy">
-          <div class="overlay"></div>
-          <div class="overlay-text"><h2>20 minutos para mim</h2><p>Yoga restaurativo · 7 dias por semana · sem pressa</p></div>
-        </a>
-        <div class="post-body">
-          <p>O yoga mudou minha relação com o corpo. Não é sobre fazer a pose perfeita — é sobre sentir. A rotina de 20 minutos antes do trabalho mudou tudo.</p>
-          <div class="comment-preview" aria-label="Comentários">
-            <div class="c"><strong>João Costa</strong> Quando você faz? Antes do café?</div>
-          </div>
-          <div class="actions" role="group" aria-label="Ações na postagem">
-            <button onclick="this.classList.toggle('liked')" aria-label="Curtir postagem" aria-pressed="false"><span aria-hidden="true">❤️</span> 342</button>
-            <button aria-label="Comentar"><span aria-hidden="true">💬</span> 27</button>
-            <button aria-label="Compartilhar"><span aria-hidden="true">↗</span> 19</button>
-          </div>
-        </div>
+      <article class="card" onclick="location.href='produto.html?nome=Strogonof+Frango'">
+        <img src="public/strogonof-m.png" alt="Strogonof Frango" loading="lazy">
+        <h3>Strogonof Frango</h3>
+        <div class="price">R$ 27,00</div>
+        <div class="meta">M / G</div>
       </article>
-
-      <!-- Post 4 -->
-      <article class="post-card" aria-label="Postagem de Pedro Lima — treino de força">
-        <div class="card-head">
-          <a href="#" aria-label="Perfil de Pedro Lima"><img class="author" src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=160&h=160&fit=crop&crop=face&q=80" alt="Pedro Lima"></a>
-          <div class="meta">
-            <h3><a href="#">Pedro Lima</a></h3>
-            <div class="time">3 dias atrás <span aria-label="categoria">· <span class="tag">Musculação</span></span></div>
-          </div>
-        </div>
-        <a href="#" class="post-img" aria-label="Ver postagem completa de Pedro Lima sobre treino de força">
-          <img src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=1200&h=750&fit=crop&q=80" alt="Homem fazendo levantamento de peso em academia moderna" loading="lazy">
-          <div class="overlay"></div>
-          <div class="overlay-text"><h2>Planilha de força — semana 12</h2><p>Agachamento 3×8 · Romana 3×10 · Prensa 3×12</p></div>
-        </a>
-        <div class="post-body">
-          <p>Depois de 12 semanas, percebi o maior ganho não é no peso levantado — é na postura e no sono. A consistência venceu a intensidade.</p>
-          <div class="actions" role="group" aria-label="Ações na postagem">
-            <button onclick="this.classList.toggle('liked')" aria-label="Curtir postagem" aria-pressed="false"><span aria-hidden="true">❤️</span> 89</button>
-            <button aria-label="Comentar"><span aria-hidden="true">💬</span> 7</button>
-            <button aria-label="Compartilhar"><span aria-hidden="true">↗</span> 5</button>
-          </div>
-        </div>
-      </article>
-
-      <!-- Post 5 — exemplo mensagem -->
-      <article class="post-card" aria-label="Postagem de exemplo — mensagem direta de Carlos Mendes">
-        <div class="card-head">
-          <a href="#" aria-label="Perfil de Carlos Mendes"><img class="author" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=160&h=160&fit=crop&crop=face&q=80" alt="Carlos Mendes"></a>
-          <div class="meta">
-            <h3><a href="#">Carlos Mendes</a></h3>
-            <div class="time">Hoje, 09:10 <span aria-label="categoria">· <span class="tag">Mensagem</span></span></div>
-          </div>
-        </div>
-        <div class="post-body" style="padding-top: 18px;">
-          <span class="example-badge">Exemplo de mensagem</span>
-          <p>Oi, Ana! Vi sua postagem sobre o prato de quinoa. Estou começando minha jornada de alimentação balanceada e gostaria de trocar ideias. Você usa algum app para planejar refeições? Gostaria de conectar!</p>
-          <div class="actions" role="group" aria-label="Ações na postagem">
-            <button onclick="this.classList.toggle('liked')" aria-label="Curtir postagem" aria-pressed="false"><span aria-hidden="true">❤️</span> 23</button>
-            <button onclick="App.openChat('carlos')" aria-label="Responder Carlos Mendes"><span aria-hidden="true">💬</span> Responder</button>
-          </div>
-        </div>
+      <article class="card" onclick="location.href='produto.html?nome=Bife+a+Parme'">
+        <img src="public/bife-parme-m.png" alt="Bife a Parme" loading="lazy">
+        <h3>Bife a Parme</h3>
+        <div class="price">R$ 29,00</div>
+        <div class="meta">M / G</div>
       </article>
     </div>
+    <a href="menu.html" class="btn" style="margin-top:.75rem">Ver cardápio completo</a>
   </section>
 
-  <!-- Aba: Mensagens -->
-  <section class="tab-content" id="tab-mensagens" role="tabpanel" aria-label="Mensagens — conversas diretas">
-    <div style="margin-bottom:14px; display:flex; gap:10px; align-items:center;">
-      <input id="msg-search" type="search" placeholder="Buscar mensagens ou contatos…" style="flex:1;padding:10px 14px;border-radius:999px;border:1px solid var(--line);background:var(--bg);color:var(--ink);font-size:14px;outline:none;" aria-label="Filtrar mensagens e contatos">
-      <button onclick="App.filterMessages()" aria-label="Filtrar" style="padding:8px 14px;border-radius:999px;background:var(--accent-2);color:white;border:none;font-weight:600;cursor:pointer;">Filtrar</button>
-    </div>
-    <div id="conversations-list" aria-label="Lista de conversas" role="list"></div>
-    <div id="chat-view" style="display:none;" role="region" aria-label="Conversa ativa">
-      <div class="chat-header" role="banner" aria-label="Cabeçalho da conversa">
-        <button onclick="App.closeChat()" aria-label="Voltar para conversas" style="font-size:18px;margin-right:8px;background:none;border:none;cursor:pointer;color:inherit;">←</button>
-        <img id="chat-avatar" src="" alt="">
-        <h3 id="chat-name"></h3>
-      </div>
-      <div class="chat-messages" id="chat-messages" role="log" aria-live="polite" aria-label="Mensagens da conversa"></div>
-      <div id="msg-panel" style="display:none; background:var(--surface); border-top:1px solid var(--line); padding:16px; border-radius:0 0 var(--radius) var(--radius);">
-        <h4 style="font-family:'Fraunces',Georgia,serif; font-size:16px; margin-bottom:12px;">Painel da Mensagem</h4>
-        <div style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:10px;" aria-label="Emojis disponíveis">
-          <button onclick="App.applyEmoji(this,'❤️')" aria-label="Reagir com coração">❤️</button>
-          <button onclick="App.applyEmoji(this,'👍')" aria-label="Reagir com joinha">👍</button>
-          <button onclick="App.applyEmoji(this,'😂')" aria-label="Reagir com risada">😂</button>
-          <button onclick="App.applyEmoji(this,'🔥')" aria-label="Reagir com fogo">🔥</button>
-        </div>
-        <div style="display:flex; gap:8px; align-items:center;">
-          <label style="font-size:12px; font-weight:500; color:var(--ink-soft);"><input type="checkbox" id="msg-select" aria-label="Selecionar mensagem para excluir ou mover"> Selecionar</label>
-          <button onclick="App.deleteSelectedMsg()" aria-label="Excluir mensagem selecionada" style="padding:6px 12px; border-radius:999px; background:var(--accent); color:white; border:none; font-weight:600; font-size:12px; cursor:pointer;">Excluir</button>
-          <button onclick="App.moveSelectedMsg()" aria-label="Mover mensagem selecionada para arquivo" style="padding:6px 12px; border-radius:999px; background:var(--accent-2); color:white; border:none; font-weight:600; font-size:12px; cursor:pointer;">Mover para arquivo</button>
-        </div>
-      </div>
+  <section class="section" aria-label="Como funciona">
+    <h2>Como pedir</h2>
+    <div class="card-grid">
+      <div class="card"><h3>1. Escolha</h3><p style="font-size:.85rem;color:var(--cinza)">Monte sua marmita no cardápio.</p></div>
+      <div class="card"><h3>2. Finalize</h3><p style="font-size:.85rem;color:var(--cinza)">Dados + pagamento direto.</p></div>
+      <div class="card"><h3>3. Acompanhe</h3><p style="font-size:.85rem;color:var(--cinza)">Status em tempo real.</p></div>
     </div>
   </section>
-
-  <!-- Aba: Grupos -->
-  <section class="tab-content" id="tab-grupos" role="tabpanel" aria-label="Grupos — comunidades de rotina saudável">
-    <div style="margin-bottom: 16px;" aria-label="Busca de grupos">
-      <input id="group-search" type="search" placeholder="Buscar grupos…" style="width:100%;padding:10px 14px;border-radius:999px;border:1px solid var(--line);background:var(--bg);color:var(--ink);font-size:14px;outline:none;" aria-label="Buscar grupos">
-    </div>
-    <div class="feed" id="groups-container" aria-label="Grupos disponíveis" role="list"></div>
-
-    <!-- Modal de resultados de busca -->
-    <div id="search-overlay" class="search-overlay" onclick="if(event.target===this)App.closeSearchOverlay()" role="dialog" aria-modal="true" aria-label="Resultados da busca de grupos" style="display:none;">
-      <div class="search-modal" aria-label="Resultados da busca">
-        <h3>Resultados</h3>
-        <div id="group-search-results" aria-label="Grupos encontrados"></div>
-      </div>
-    </div>
-    <div id="group-view" style="display:none;" role="region" aria-label="Visualização de grupo">
-      <div class="chat-header" role="banner" aria-label="Cabeçalho do grupo">
-        <button onclick="App.closeGroup()" aria-label="Voltar para grupos" style="font-size:18px;margin-right:8px;background:none;border:none;cursor:pointer;color:inherit;">←</button>
-        <div id="group-view-icon" style="width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;"></div>
-        <h3 id="group-view-name"></h3>
-      </div>
-      <div class="group-mural" id="group-mural" role="log" aria-live="polite" aria-label="Mural do grupo"></div>
-      <div class="chat-input visible" id="group-input" role="form" aria-label="Enviar mensagem no grupo">
-        <input id="group-msg-input" placeholder="Escreva uma mensagem…" aria-label="Sua mensagem no grupo" onkeydown="if(event.key==='Enter')App.sendGroupMsg()">
-        <button onclick="App.sendGroupMsg()" aria-label="Enviar mensagem no grupo">➤</button>
-      </div>
-    </div>
-  </section>
-
-  <!-- Aba: Progresso -->
-  <section class="tab-content" id="tab-progresso" role="tabpanel" aria-label="Progresso — acompanhamentos e metas">
-    <div class="progress-header" aria-label="Resumo do progresso">
-      <h2>Meu progresso</h2>
-      <p>Semana 38 de 2026 · 12 dias consecutivos</p>
-    </div>
-    <div class="metric-row" id="progress-metrics" aria-label="Métricas principais" role="list"></div>
-    <h3 style="font-family:Fraunces,Georgia,serif;font-size:18px;margin-bottom:12px;">Metas da semana</h3>
-    <div class="goals" id="progress-goals" aria-label="Metas atuais" role="list"></div>
-    <h3 style="font-family:Fraunces,Georgia,serif;font-size:18px;margin:24px 0 12px;">Histórico recente</h3>
-    <div style="display:flex;flex-direction:column;gap:8px;" aria-label="Histórico de treinos" role="list">
-      <div style="background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-sm);padding:14px 18px;display:flex;justify-content:space-between;align-items:center;" role="listitem" aria-label="Segunda-feira — 3 treinos"><span style="font-size:13px;color:var(--ink-soft);">Seg · 15 Set</span><span style="font-size:13px;font-weight:600;color:var(--accent-2);">✅ 3 treinos</span></div>
-      <div style="background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-sm);padding:14px 18px;display:flex;justify-content:space-between;align-items:center;" role="listitem" aria-label="Quarta-feira — 2 treinos"><span style="font-size:13px;color:var(--ink-soft);">Qua · 17 Set</span><span style="font-size:13px;font-weight:600;color:var(--accent-2);">✅ 2 treinos</span></div>
-      <div style="background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-sm);padding:14px 18px;display:flex;justify-content:space-between;align-items:center;" role="listitem" aria-label="Sexta-feira — incompleto"><span style="font-size:13px;color:var(--ink-soft);">Sex · 19 Set</span><span style="font-size:13px;font-weight:600;color:var(--accent);">⏳ Incompleto</span></div>
-      <div style="background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-sm);padding:14px 18px;display:flex;justify-content:space-between;align-items:center;" role="listitem" aria-label="Domingo — pendente"><span style="font-size:13px;color:var(--ink-soft);">Dom · 21 Set</span><span style="font-size:13px;font-weight:600;color:var(--ink-faint);">🔜 Pendente</span></div>
-    </div>
-  </section>
-
 </main>
 
-<!-- Navegação inferior (mobile-first, centralizado, segura área) -->
-<nav class="bottom-nav" aria-label="Navegação inferior — acesso rápido às funcionalidades" role="navigation">
-  <div class="bottom-nav-inner" aria-label="Botões de navegação principal">
-    <a href="#" class="active" data-tab="feed" aria-label="Feed de rotinas" aria-current="page"><span aria-hidden="true">📋</span> Feed</a>
-    <a href="#" data-tab="mensagens" aria-label="Mensagens — conversar com contatos"><span aria-hidden="true">💬</span> Mensagens</a>
-    <a href="#" data-tab="grupos" aria-label="Grupos — explorar comunidades"><span aria-hidden="true">👥</span> Grupos</a>
-    <a href="#" data-tab="progresso" aria-label="Progresso — acompanhar metas"><span aria-hidden="true">📊</span> Progresso</a>
-  </div>
-</nav>
-
-<!-- Entrada de mensagem individual (oculta por padrão) -->
-<div class="chat-input" id="chat-input" role="form" aria-label="Enviar mensagem de texto para contato" style="display:none;">
-  <input id="chat-msg-input" type="text" placeholder="Escreva uma mensagem…" aria-label="Sua mensagem para o contato" onkeydown="if(event.key==='Enter')App.sendMsg()">
-  <button onclick="App.startVoiceRecording()" aria-label="Gravar mensagem de áudio" type="button" style="margin-left:6px;padding:8px 10px;border-radius:999px;background:var(--accent-2);color:white;border:none;cursor:pointer;font-size:16px;">🎤</button>
-  <button onclick="App.sendMsg()" aria-label="Enviar mensagem" type="button">➤</button>
-</div>
-
-<!-- Modal de Cadastro / Login -->
-<div id="auth-modal" class="search-overlay" role="dialog" aria-modal="true" aria-label="Cadastro e Login" style="display:none; z-index:130;">
-  <div class="search-modal" style="max-width:420px; padding:24px;">
-    <h2 style="font-family:'Fraunces',Georgia,serif; font-size:22px; margin-bottom:4px;">VidaSã</h2>
-    <p style="font-size:13px; color:var(--ink-muted); margin-bottom:20px;">Entre para acessar sua rotina saudável.</p>
-
-    <form onsubmit="event.preventDefault(); App.handleAuthSubmit(this);" aria-label="Formulário de cadastro e login">
-      <label for="auth-name" style="display:block; font-size:12px; font-weight:600; color:var(--ink-soft); margin-bottom:4px;">Nome</label>
-      <input id="auth-name" type="text" placeholder="Seu nome" style="width:100%; padding:10px 14px; border-radius:999px; border:1px solid var(--line); background:var(--bg); color:var(--ink); font-size:14px; margin-bottom:14px; outline:none;" aria-required="true">
-
-      <label for="auth-email" style="display:block; font-size:12px; font-weight:600; color:var(--ink-soft); margin-bottom:4px;">E-mail</label>
-      <input id="auth-email" type="email" placeholder="exemplo@email.com" style="width:100%; padding:10px 14px; border-radius:999px; border:1px solid var(--line); background:var(--bg); color:var(--ink); font-size:14px; margin-bottom:14px; outline:none;" aria-required="true">
-
-      <label for="auth-password" style="display:block; font-size:12px; font-weight:600; color:var(--ink-soft); margin-bottom:4px;">Senha</label>
-      <input id="auth-password" type="password" placeholder="Sua senha" style="width:100%; padding:10px 14px; border-radius:999px; border:1px solid var(--line); background:var(--bg); color:var(--ink); font-size:14px; margin-bottom:20px; outline:none;" aria-required="true">
-
-      <button type="submit" style="width:100%; padding:12px; border-radius:999px; border:none; background:var(--accent-2); color:white; font-weight:600; font-size:15px; cursor:pointer; transition:opacity .15s;" onmouseover="this.style.opacity='0.9'" onmouseout="this.style.opacity='1'">Entrar / Cadastrar</button>
-    </form>
-
-    <p style="font-size:11px; color:var(--ink-faint); text-align:center; margin-top:14px;">Dados salvos localmente. Para produção, conecte ao PostgreSQL.</p>
-  </div>
-</div>
-
-<script src="app.js"></script>
+<footer>
+  Santo Sabor Gastronomia — Biguaçu, SC • <a href="login.html">Área do cliente</a>
+</footer>
 </body>
 </html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Checkout — Santo Sabor</title><link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;900&display=swap" rel="stylesheet"><style>:root{--tema:#D97706;--fundo:#FFF8F0;--card:#fff;--texto:#3E2723;--borda:#EAE0D6;--verde:#2A9D8F;}
+*{box-sizing:border-box;margin:0;padding:0}body{font-family:'Poppins',system-ui,sans-serif;background:var(--fundo);color:var(--texto)}
+.container{max-width:720px;margin:0 auto;padding:1rem}
+header{background:linear-gradient(135deg,#D97706,#92400E);color:#fff;padding:1.2rem;text-align:center}
+header h1{font-size:1.2rem;font-weight:900}
+.card{background:var(--card);border:1px solid var(--borda);border-radius:.8rem;padding:1rem;margin-bottom:.75rem}
+label{font-weight:600;font-size:.9rem;display:block;margin:.35rem 0 .15rem}
+input,select{width:100%;padding:.65rem;border:1px solid var(--borda);border-radius:.6rem;font-size:1rem}
+.btn{display:block;background:var(--tema);color:#fff;border:none;padding:.85rem;border-radius:.7rem;font-weight:700;text-align:center;margin-top:.5rem;cursor:pointer}
+.nav{display:flex;gap:.4rem;overflow-x:auto;padding:.5rem 0;margin-bottom:.5rem}
+.nav a{flex:0 0 auto;background:#fff;border:1px solid var(--borda);padding:.35rem .7rem;border-radius:999px;font-size:.78rem;font-weight:600;color:var(--texto)}
+.review{display:flex;justify-content:space-between;border-bottom:1px dashed var(--borda);padding:.25rem 0;font-size:.85rem}
+</style></head>
+<body><header><h1>Checkout — Santo Sabor</h1></header>
+<main class="container" aria-label="Checkout">
+  <nav class="nav" aria-label="Links"><a href="index.html">Home</a><a href="menu.html">Cardápio</a><a href="produto.html">Produto</a><a href="carrinho.html">Carrinho</a><a href="checkout.html" class="active">Checkout</a><a href="acompanhamento.html">Acompanhar</a><a href="login.html">Entrar</a></nav>
+  <form onsubmit="event.preventDefault(); confirmar();" aria-label="Formulário de checkout">
+    <section class="card" aria-label="Dados pessoais">
+      <h2 style="font-size:1rem;font-weight:700;margin-bottom:.5rem">Dados</h2>
+      <label for="nome">Nome completo</label><input id="nome" type="text" required aria-required="true">
+      <label for="tel">Telefone / WhatsApp</label><input id="tel" type="tel" placeholder="(48) 99999-9999" required aria-required="true">
+      <label for="cep">CEP</label><input id="cep" type="text" placeholder="00000-000" required aria-required="true">
+      <label for="end">Endereço</label><input id="end" type="text" placeholder="Rua, número, bairro" required aria-required="true">
+      <label for="obs">Observação de entrega</label><input id="obs" type="text" placeholder="Portão, interfone, andar">
+    </section>
+
+    <section class="card" aria-label="Pagamento">
+      <h2 style="font-size:1rem;font-weight:700;margin-bottom:.5rem">Pagamento</h2>
+      <label for="pag">Forma de pagamento</label>
+      <select id="pag" aria-label="Forma de pagamento"><option>Pix</option><option>Cartão na entrega</option></select>
+    </section>
+
+    <section class="card" aria-label="Revisão do pedido">
+      <h2 style="font-size:1rem;font-weight:700;margin-bottom:.5rem">Revisão</h2>
+      <div id="review"></div>
+    </section>
+
+    <button class="btn" type="submit">Confirmar pedido</button>
+  </form>
+</main>
+<script>
+function fmt(n){return 'R$ '+n.toFixed(2).replace('.',',');}
+function renderReview(){
+  const items=JSON.parse(localStorage.getItem('santosabor_cart')||'[]');
+  let html='',sub=0;
+  items.forEach(it=>{sub+=it.preco*it.qtd; html+=`<div class="review"><span>${it.qtd}x ${it.nome} (${it.tam})</span><span>${fmt(it.preco*it.qtd)}</span></div>`;});
+  html+=`<div class="review" style="font-weight:700"><span>Subtotal</span><span>${fmt(sub)}</span></div>`;
+  html+=`<div class="review" style="font-weight:700"><span>Entrega</span><span>R$ 5,00</span></div>`;
+  html+=`<div class="review" style="font-weight:700;font-size:1.05rem"><span>Total</span><span>${fmt(sub+5)}</span></div>`;
+  document.getElementById('review').innerHTML=html||'<p>Sem itens.</p>';
+}
+function confirmar(){
+  const nome=document.getElementById('nome').value||'Cliente';
+  const pedido={id:1024,nome,telefone:document.getElementById('tel').value,end:document.getElementById('end').value,status:'Recebido',data:new Date().toISOString()};
+  localStorage.setItem('santosabor_pedido',JSON.stringify(pedido));
+  alert('Pedido confirmado! Número #' + pedido.id + '. Redirecionando para acompanhamento...');
+  window.location.href='acompanhamento.html';
+}
+renderReview();
+</script></body></html>

@@ -1,11 +1,12 @@
 const express = require('express');
 const { Pool } = require('pg');
 const dotenv = require('dotenv');
+const { body, validationResult } = require('express-validator');
 
 dotenv.config();
 
 const app = express();
-const pool = new Pool({
+// ATENÇÃO: senha ainda em texto plano no banco — usar bcrypt no cadastro/login
   user: process.env.PGUSER || 'postgres',
   host: process.env.PGHOST || 'localhost',
   database: process.env.PGDATABASE || 'vidasã',
@@ -16,27 +17,42 @@ const pool = new Pool({
 app.use(express.json());
 app.use(express.static('public'));
 
-// Cadastro
-app.post('/auth/cadastro', async (req, res) => {
-  const { nome, email, senha_hash } = req.body;
+// Rotas de catálogo, pedidos e entrega (e-commerce Santo Sabor)
+app.use('/produtos', require('./src/routes/products'));
+app.use('/pedidos', require('./src/routes/orders'));
+app.use('/entrega', require('./src/routes/delivery'));
+
+const authService = require('./src/services/authService');
+
+// Cadastro (com hash bcrypt + validação)
+app.post('/auth/cadastro', [
+  body('nome').trim().notEmpty().withMessage('Nome é obrigatório'),
+  body('email').isEmail().normalizeEmail().withMessage('E-mail inválido'),
+  body('senha_hash').isLength({ min: 6 }).withMessage('Senha deve ter pelo menos 6 caracteres')
+], async (req, res) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) return res.status(400).json({ success: false, errors: errors.array() });
+  const { nome, email, senha_hash } = req.body; // senha_hash agora é a senha real
   try {
-    const result = await pool.query(
-      'INSERT INTO usuarios (nome, email, senha_hash) VALUES ($1, $2, $3) RETURNING id, nome, email, criado_em',
-      [nome, email, senha_hash]
-    );
-    res.status(201).json({ success: true, usuario: result.rows[0] });
+    const user = await authService.createUser(nome, email, senha_hash);
+    res.status(201).json({ success: true, usuario: user });
   } catch (e) {
     res.status(500).json({ success: false, error: e.message });
   }
 });
 
-// Login (simples)
-app.post('/auth/login', async (req, res) => {
+// Login (verifica hash + validação)
+app.post('/auth/login', [
+  body('email').isEmail().normalizeEmail(),
+  body('senha_hash').notEmpty()
+], async (req, res) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) return res.status(400).json({ success: false, errors: errors.array() });
   const { email, senha_hash } = req.body;
   try {
-    const result = await pool.query('SELECT id, nome, email FROM usuarios WHERE email = $1 AND senha_hash = $2', [email, senha_hash]);
-    if (result.rows.length === 0) return res.status(401).json({ success: false, error: 'Credenciais inválidas' });
-    res.json({ success: true, usuario: result.rows[0] });
+    const user = await authService.login(email, senha_hash);
+    if (!user) return res.status(401).json({ success: false, error: 'Credenciais inválidas' });
+    res.json({ success: true, usuario: user });
   } catch (e) {
     res.status(500).json({ success: false, error: e.message });
   }

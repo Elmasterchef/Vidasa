@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Produto — Santo Sabor</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--tema:#D97706;--tema-escuro:#92400E;--fundo:#FFF8F0;--card:#fff;--texto:#3E2723;--cinza:#6D4C41;--borda:#EAE0D6;--verde:#2A9D8F;}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Poppins',system-ui,sans-serif;background:var(--fundo);color:var(--texto);line-height:1.35}
+.container{max-width:720px;margin:0 auto;padding:1rem}
+header{background:linear-gradient(135deg,#D97706,#92400E);color:#fff;padding:1rem;text-align:center}
+header h1{font-size:1.3rem;font-weight:900}
+.img-large{width:100%;aspect-ratio:16/10;object-fit:cover;border-radius:1rem;box-shadow:0 10px 30px rgba(62,39,35,.12)}
+.card{background:var(--card);border:1px solid var(--borda);border-radius:.8rem;padding:1rem;margin:1rem 0;box-shadow:0 4px 14px rgba(62,39,35,.07)}
+.h2{font-size:1.15rem;font-weight:700;margin-bottom:.5rem}
+.price{font-size:1.4rem;font-weight:900;color:var(--tema);margin:.25rem 0}
+.select-size{display:flex;gap:.5rem;margin:.5rem 0}
+.select-size button{flex:1;padding:.55rem;border:1px solid var(--borda);border-radius:.6rem;background:#fff;font-weight:700;font-size:.9rem;cursor:pointer}
+.select-size button.active{background:var(--tema);color:#fff;border-color:var(--tema)}
+input{width:100%;padding:.65rem;border:1px solid var(--borda);border-radius:.6rem;font-size:1rem}
+.btn{display:block;background:var(--tema);color:#fff;border:none;padding:.85rem;border-radius:.7rem;font-weight:700;font-size:1rem;width:100%;cursor:pointer;margin-top:.5rem}
+.nav{display:flex;gap:.4rem;overflow-x:auto;padding:.5rem 0;margin-bottom:.5rem}
+.nav a{flex:0 0 auto;background:#fff;border:1px solid var(--borda);padding:.4rem .8rem;border-radius:999px;font-size:.8rem;font-weight:600;color:var(--texto)}
+.nav a.active{background:var(--tema);color:#fff;border-color:var(--tema)}
+</style>
+</head>
+<body>
+<header><h1>Produto — Santo Sabor</h1><p>Foto real • Preço direto</p></header>
+<main class="container" aria-label="Página do produto">
+  <nav class="nav" aria-label="Links do site">
+    <a href="index.html">Home</a><a href="menu.html">Cardápio</a><a href="produto.html" class="active">Produto</a><a href="carrinho.html">Carrinho</a><a href="checkout.html">Checkout</a><a href="acompanhamento.html">Acompanhar</a><a href="login.html">Entrar</a>
+  </nav>
+
+  <img id="prod-img" src="public/bife-milanesa-m.png" alt="Bife a Milanesa" class="img-large" loading="lazy" onerror="this.style.display='none'">
+
+  <section class="card" aria-label="Detalhes do produto">
+    <h2 id="prod-nome" class="h2">Bife a Milanesa</h2>
+    <div class="price" id="prod-preco">R$ 28,00</div>
+    <p style="font-size:.9rem;color:var(--cinza);margin-bottom:.5rem">Marmita caseira com bife empanado, arroz branco, feijão, salada e batata frita.</p>
+
+    <div class="select-size" role="group" aria-label="Tamanho">
+      <button type="button" onclick="setTam(this,'M')" class="active">M</button>
+      <button type="button" onclick="setTam(this,'G')">G</button>
+    </div>
+
+    <label for="obs" style="font-weight:600;font-size:.85rem">Observação (opcional)</label>
+    <input id="obs" type="text" placeholder="Ex: sem sal, extra molho" aria-label="Observação do pedido">
+
+    <label for="qtd" style="font-weight:600;font-size:.85rem;margin-top:.5rem">Quantidade</label>
+    <input id="qtd" type="number" value="1" min="1" max="10" aria-label="Quantidade">
+
+    <button class="btn" onclick="finalizar()">Adicionar e finalizar</button>
+    <a href="carrinho.html" class="btn" style="background:var(--fundo);color:var(--texto);border:1px solid var(--borda);margin-top:.25rem">Ver carrinho</a>
+  </section>
+</main>
+<script>
+let tam='M';
+function setTam(b,t){tam=t;b.parentElement.querySelectorAll('button').forEach(x=>x.classList.remove('active'));b.classList.add('active');}
+function finalizar(){
+  const nome=document.getElementById('prod-nome').textContent;
+  const preco=document.getElementById('prod-preco').textContent.replace('R$ ','').replace('.00','').replace(',','.')*1;
+  const q=document.getElementById('qtd').value||1;
+  const items=JSON.parse(localStorage.getItem('santosabor_cart')||'[]');
+  items.push({nome,tam,preco,qtd:parseInt(q)});
+  localStorage.setItem('santosabor_cart',JSON.stringify(items));
+  alert('Adicionado! Redirecionando para checkout...');
+  window.location.href='checkout.html';
+}
+</script>
+</body>
+</html>

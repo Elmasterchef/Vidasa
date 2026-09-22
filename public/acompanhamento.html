@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Acompanhar Pedido — Santo Sabor</title>
+<style>
+:root{--primaria:#D97706;--fundo:#FFF8F0;--texto:#3E2723;--borda:#EAE0D6;--verde:#2A9D8F;}
+body{font-family:system-ui,sans-serif;background:var(--fundo);color:var(--texto);margin:0;padding:0}
+.container{max-width:720px;margin:0 auto;padding:1rem}
+.card{background:#fff;border:1px solid var(--borda);border-radius:.75rem;padding:1rem;margin-bottom:1rem}
+h1{font-size:1.4rem}
+.step{display:flex;align-items:center;gap:.75rem;padding:.5rem 0;border-bottom:1px dashed #ddd}
+.step.done{color:var(--verde);font-weight:600}
+</style>
+</head>
+<body>
+<header style="background:linear-gradient(135deg,#D97706,#92400E);color:#fff;padding:1.5rem;text-align:center;">
+  <strong>Santo Sabor</strong>
+</header>
+<main class="container">
+  <h1><a href="index.html" style="color:#fff;text-decoration:none">Santo Sabor</a></h1>
+  <h2>Pedido #1024</h2>
+  <div class="card">
+    <h2>Status</h2>
+    <div class="step done">✓ Pedido recebido</div>
+    <div class="step done">✓ Pedido confirmado</div>
+    <div class="step">→ Em preparação</div>
+    <div class="step">→ Saiu para entrega</div>
+    <div class="step">✓ Entregue</div>
+  </div>
+  <div class="card">
+    <h2>Endereço</h2>
+    <p>Rua das Marmitas, 123 — Biguaçu, SC</p>
+  </div>
+  <div class="card">
+    <h2>Itens</h2>
+    <p>1x Marmita Frango Grelhado (M) — R$ 25,00</p>
+  </div>
+  <div class="card">
+    <h2>Total</h2>
+    <p><strong>R$ 25,00</strong> + entrega R$ 5,00 = <strong>R$ 30,00</strong></p>
+  </div>
+</main>
+</body>
+</html>

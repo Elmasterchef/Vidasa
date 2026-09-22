@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Cardápio — Santo Sabor</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--tema:#D97706;--tema-escuro:#92400E;--fundo:#FFF8F0;--card:#fff;--texto:#3E2723;--cinza:#6D4C41;--borda:#EAE0D6;--verde:#2A9D8F;}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Poppins',system-ui,sans-serif;background:var(--fundo);color:var(--texto);line-height:1.35}
+.container{max-width:720px;margin:0 auto;padding:1rem}
+header{background:linear-gradient(135deg,#D97706,#92400E);color:#fff;padding:1.2rem 1rem;text-align:center}
+header h1{font-size:1.4rem;font-weight:900}
+.card{background:var(--card);border:1px solid var(--borda);border-radius:.8rem;padding:.75rem;margin-bottom:.75rem;box-shadow:0 4px 14px rgba(62,39,35,.07)}
+.card img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:.5rem;margin-bottom:.5rem}
+.card h3{font-size:1rem;font-weight:700;margin-bottom:.25rem}
+.card .price{font-weight:700;color:var(--tema);font-size:1.05rem}
+.card .tags{font-size:.78rem;color:var(--cinza);margin:.25rem 0}
+.card .actions{display:flex;gap:.5rem;margin-top:.5rem}
+.btn{flex:1;background:var(--tema);color:#fff;border:none;padding:.65rem;border-radius:.6rem;font-weight:700;font-size:.85rem;cursor:pointer}
+.btn:active{transform:scale(.98)}
+.select-size{display:flex;gap:.4rem;margin:.25rem 0}
+.select-size button{flex:1;padding:.35rem;border:1px solid var(--borda);border-radius:.5rem;background:#fff;font-weight:600;font-size:.75rem;cursor:pointer}
+.select-size button.active{background:var(--tema);color:#fff;border-color:var(--tema)}
+input.qty{width:60px;padding:.35rem;text-align:center;border:1px solid var(--borda);border-radius:.5rem;font-weight:700}
+.nav{display:flex;gap:.5rem;overflow-x:auto;padding:.5rem 0;margin-bottom:.5rem}
+.nav a{flex:0 0 auto;background:#fff;border:1px solid var(--borda);padding:.4rem .8rem;border-radius:999px;font-size:.8rem;font-weight:600;color:var(--texto)}
+.nav a.active{background:var(--tema);color:#fff;border-color:var(--tema)}
+.footer-nav{display:flex;justify-content:center;gap:.5rem;margin-top:1rem;padding-top:.5rem;border-top:1px solid var(--borda);flex-wrap:wrap}
+</style>
+</head>
+<body>
+<header><h1>Cardápio — Santo Sabor</h1><p>Marmitas caseiras • Pronto em 20 min</p></header>
+<main class="container">
+  <nav class="nav" aria-label="Seções" aria-label="Links do site">
+    <a href="index.html">Home</a>
+    <a href="menu.html" class="active">Cardápio</a>
+    <a href="produto.html">Produto</a>
+    <a href="carrinho.html">Carrinho</a>
+    <a href="checkout.html">Checkout</a>
+    <a href="acompanhamento.html">Acompanhar</a>
+    <a href="login.html">Entrar</a>
+  </nav>
+
+  <section aria-label="Marmitas disponíveis">
+    <article class="card" id="marmita-bife-milanesa">
+      <img src="public/bife-milanesa-m.png" alt="Bife a Milanesa" loading="lazy" onerror="this.style.display='none'">
+      <h3>Bife a Milanesa</h3>
+      <div class="tags">M • G • Frango/Peixe • <span class="badge" style="display:inline-block;background:#2A9D8F;color:#fff;font-size:.7rem;padding:.15rem .45rem;border-radius:999px;font-weight:700">Popular</span></div>
+      <div class="price">R$ 28,00</div>
+      <div class="select-size" role="group" aria-label="Tamanho">
+        <button type="button" onclick="pickSize(this,'M')" class="active">M</button>
+        <button type="button" onclick="pickSize(this,'G')">G</button>
+      </div>
+      <div class="actions">
+        <input type="number" class="qty" value="1" min="1" max="10" aria-label="Quantidade" id="qty-bife">
+        <button class="btn" onclick="addToCart('Bife a Milanesa',28,'M',getQty('qty-bife'))">+ Adicionar</button>
+      </div>
+    </article>
+
+    <article class="card" id="marmita-frango">
+      <img src="public/frango-cavalo-m.png" alt="Filé de Frango Grelhado" loading="lazy" onerror="this.style.display='none'">
+      <h3>Filé de Frango Grelhado</h3>
+      <div class="tags">M • G</div>
+      <div class="price">R$ 25,00</div>
+      <div class="select-size" role="group" aria-label="Tamanho">
+        <button type="button" onclick="pickSize(this,'M')" class="active">M</button>
+        <button type="button" onclick="pickSize(this,'G')">G</button>
+      </div>
+      <div class="actions">
+        <input type="number" class="qty" value="1" min="1" max="10" aria-label="Quantidade" id="qty-frango">
+        <button class="btn" onclick="addToCart('Filé de Frango Grelhado',25,'M',getQty('qty-frango'))">+ Adicionar</button>
+      </div>
+    </article>
+
+    <article class="card" id="marmita-strogonof">
+      <img src="public/strogonof-m.png" alt="Strogonof Frango" loading="lazy" onerror="this.style.display='none'">
+      <h3>Strogonof Frango</h3>
+      <div class="tags">M • G</div>
+      <div class="price">R$ 27,00</div>
+      <div class="select-size" role="group" aria-label="Tamanho">
+        <button type="button" onclick="pickSize(this,'M')" class="active">M</button>
+        <button type="button" onclick="pickSize(this,'G')">G</button>
+      </div>
+      <div class="actions">
+        <input type="number" class="qty" value="1" min="1" max="10" aria-label="Quantidade" id="qty-strogonof">
+        <button class="btn" onclick="addToCart('Strogonof Frango',27,'M',getQty('qty-strogonof'))">+ Adicionar</button>
+      </div>
+    </article>
+
+    <article class="card" id="marmita-bife-parme">
+      <img src="public/bife-parme-m.png" alt="Bife a Parme" loading="lazy" onerror="this.style.display='none'">
+      <h3>Bife a Parme</h3>
+      <div class="tags">M • G</div>
+      <div class="price">R$ 29,00</div>
+      <div class="select-size" role="group" aria-label="Tamanho">
+        <button type="button" onclick="pickSize(this,'M')" class="active">M</button>
+        <button type="button" onclick="pickSize(this,'G')">G</button>
+      </div>
+      <div class="actions">
+        <input type="number" class="qty" value="1" min="1" max="10" aria-label="Quantidade" id="qty-parme">
+        <button class="btn" onclick="addToCart('Bife a Parme',29,'M',getQty('qty-parme'))">+ Adicionar</button>
+      </div>
+    </article>
+  </section>
+
+  <div style="text-align:center;margin-top:1rem">
+    <a href="checkout.html" class="btn" style="max-width:320px;margin:0 auto;display:block">Finalizar pedido</a>
+  </div>
+</main>
+
+<footer class="footer-nav">
+  <a href="index.html">Home</a>
+  <a href="produto.html">Produto</a>
+  <a href="carrinho.html">Carrinho</a>
+  <a href="checkout.html">Checkout</a>
+  <a href="acompanhamento.html">Acompanhar</a>
+  <a href="login.html">Entrar</a>
+</footer>
+
+<script>
+function pickSize(btn, sz){btn.parentElement.querySelectorAll('button').forEach(b=>b.classList.remove('active'));btn.classList.add('active');}
+function getQty(id){return parseInt(document.getElementById(id).value)||1;}
+function addToCart(nome,preco,tam,qtd){
+  const items = JSON.parse(localStorage.getItem('santosabor_cart')||'[]');
+  const idx = items.findIndex(i=>i.nome===nome && i.tam===tam);
+  if(idx>=0) items[idx].qtd += qtd; else items.push({nome,tam,preco,qtd});
+  localStorage.setItem('santosabor_cart',JSON.stringify(items));
+  alert(nome + ' (' + tam + ') x' + qtd + ' adicionado. Ir para carrinho?');
+}
+</script>
+</body>
+</html>
